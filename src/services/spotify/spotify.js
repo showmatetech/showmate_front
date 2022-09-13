@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const EVENTS_URL = 'http://localhost:8000/events'
+const EVENTS_URL = process.env.REACT_APP_EVENTS_URL
 
 // Map for localStorage keys
 const LOCALSTORAGE_KEYS = {

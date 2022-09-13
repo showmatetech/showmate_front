@@ -2,7 +2,7 @@ import React from "react";
 import styled from 'styled-components'
 import Card from '../../components/Card';
 
-const EVENTS_URL = 'http://localhost:8000/events'
+const EVENTS_URL = process.env.REACT_APP_EVENTS_URL
 
 const CenterContainer = styled.div`
     display: flex;
