@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Map from "react-map-gl";
 import Geocoder from "react-map-gl-geocoder";
 
-const token = "pk.eyJ1IjoiamF2aWVybWl4dHVyZSIsImEiOiJjbDdxOTY0MXIwMzdmM29wMnVqbHNuY253In0.eMjqesnsW4O8auLG41PsuA";
+const token = process.env.REACT_APP_MAPBOX_TOKEN;
 
 const SearchableMap = (props) => {
   const { setLatLong } = props
