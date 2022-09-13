@@ -1,0 +1,47 @@
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+@font-face {
+  font-family: "Manolete";
+  src: local("Manolete"),
+    url("./static/fonts/manolete/MANOLETE.ttf") format("truetype");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "BlinkerRegular";
+  src: local("Blinker"),
+    url("./static/fonts/blinker/Blinker-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "BlinkerBold";
+  src: local("Blinker"),
+    url("./static/fonts/blinker/Blinker-Bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "BlinkerSemiLight";
+  src: local("Blinker"),
+    url("./static/fonts/blinker/Blinker-SemiLight.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "BlinkerLight";
+  src: local("Blinker"),
+    url("./static/fonts/blinker/Blinker-Light.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "BlinkerThin";
+  src: local("Blinker"),
+    url("./static/fonts/blinker/Blinker-Thin.ttf") format("truetype");
+}
