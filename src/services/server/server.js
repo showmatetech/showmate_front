@@ -9,7 +9,7 @@ const LOCALSTORAGE_VALUES = {
     accessToken: window.localStorage.getItem(LOCALSTORAGE_KEYS.accessToken),
 }
 
-const startAI = async () => {
+export const startAI = async () => {
     try {
         const { data } = await axios.get(`${EVENTS_URL}/start?access_token=${LOCALSTORAGE_VALUES.accessToken}`)
         if (data.status === 200) {
@@ -23,7 +23,7 @@ const startAI = async () => {
     }
 }
 
-const getUserInfo = async () => {
+export const getUserInfo = async () => {
     try {
         const { data } = await axios.get(`${EVENTS_URL}/user?access_token=${LOCALSTORAGE_VALUES.accessToken}`)
         if (data.status === 200) {
@@ -37,7 +37,7 @@ const getUserInfo = async () => {
     }
 }
 
-const setUserSelection = async (selection) => {
+export const setUserSelection = async (selection) => {
     try {
         const { data } = await axios.post(`${EVENTS_URL}/selection?access_token=${LOCALSTORAGE_VALUES.accessToken}`,
             {
@@ -55,7 +55,7 @@ const setUserSelection = async (selection) => {
     }
 }
 
-const createUser = async (email) => {
+export const createUser = async (email) => {
     try {
         const { data } = await axios.post(`${EVENTS_URL}/user/create`,
             {
@@ -71,5 +71,3 @@ const createUser = async (email) => {
         return { success: false }
     }
 }
-
-module.exports = { startAI, getUserInfo, setUserSelection, createUser }
