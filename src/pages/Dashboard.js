@@ -7977,8 +7977,8 @@ function Dashboard() {
         artistsToAsk ?
         <ArtistsCarouselLayout items={artistsToAsk} setUserSelection={setUserSelectionObject} />
         :
-        <MapLayout loading={loading} withBackground={true}  title={title} sendLatLong={sendLatLong}/>
-        //<InformativeLayout loading={loading} withBackground={true}  title={title} subtitle={subtitle} calculating={calculating} eventsToAsk={eventsToAsk} startProcessing={startProcessing} seeResults={seeResults}/>
+        //<MapLayout loading={loading} withBackground={true}  title={title} sendLatLong={sendLatLong}/>
+        <InformativeLayout loading={loading} withBackground={true}  title={title} subtitle={subtitle} calculating={calculating} eventsToAsk={eventsToAsk} startProcessing={startProcessing} seeResults={seeResults}/>
         :
         <EventsCarouselLayout items={eventsToAsk}/>
       }
