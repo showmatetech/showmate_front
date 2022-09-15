@@ -3,32 +3,47 @@ import _ from "lodash";
 import StartLayout from './StartLayout';
 import CollectingLayout from './CollectingLayout';
 import FinishLayout from './FinishLayout';
-import { getUserInfo } from '../../services/server/server'
+import { getEventsStatusURL } from '../../services/server/server'
 
 function DashboardLayout(props) {
     const { initialUserInfo } = props
-    const [userInfo, setUserInfo] = useState(initialUserInfo)
+    const [userInfo, setUserInfo] = useState(false)
 
-    async function getUserInfoFetch() {
-        const result = await getUserInfo()
-        console.log(result)
-        if (result.data) {
-            setUserInfo(result.data)
-        }
-    }
+    useEffect(() => {
+        const url = getEventsStatusURL()
+        const source = new EventSource(url);
+    
+        source.addEventListener('open', () => {
+          console.log('SSE opened!');
+        });
+    
+        source.addEventListener('message', (e) => {
+          const data = JSON.parse(e.data);
+          console.log(data)
+          setUserInfo(data);
+        });
+    
+        source.addEventListener('error', (e) => {
+          console.error('Error: ',  e);
+        });
+    
+        return () => {
+          source.close();
+        };
+      }, []);
 
     function getLayout() {
         const userStatus = userInfo.status
         const email = userInfo.email
         if (userStatus === 'INITIAL_STATE') {
             return (
-                <StartLayout getUserInfoFetch={getUserInfoFetch} />
+                <StartLayout userInfo={userInfo} />
             )
         }
 
         if (userStatus === 'COLLECTING_DATA') {
             return (
-                <CollectingLayout email={email} />
+                <CollectingLayout userInfo={userInfo} email={email} />
             )
         }
 
@@ -47,16 +62,11 @@ function DashboardLayout(props) {
                 }
             })
             return (
-                <FinishLayout eventsParsed={eventsParsed} />
+                <FinishLayout userInfo={userInfo} eventsParsed={eventsParsed} />
             )
         }
     }
-
-    useEffect(() => {
-    }, [userInfo])
-
-    console.log(initialUserInfo)
-    console.log(userInfo)
+    
     if (userInfo) {
         return (
             getLayout()

@@ -75,3 +75,7 @@ export const createUser = async (email) => {
         return { success: false }
     }
 }
+
+export const getEventsStatusURL = () => {
+    return `${EVENTS_URL}/status?access_token=${LOCALSTORAGE_VALUES.accessToken}`
+}

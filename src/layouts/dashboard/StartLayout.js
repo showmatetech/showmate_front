@@ -1,9 +1,10 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import styled from 'styled-components'
 import Card from '../../components/Card';
 import MapLayout from './MapLayout';
 import ArtistsCarouselLayout from './ArtistsCarouselLayout';
-import { startAI, setUserSelection } from '../../services/server/server'
+import { startAI, setUserSelection, getEventsStatusURL } from '../../services/server/server'
+
 
 const CenterContainer = styled.div`
     display: flex;
@@ -60,33 +61,24 @@ const ButtonText = styled.h1`
 `
 
 function StartLayout(props) {
-    const { getUserInfoFetch } = props
+    const { userInfo } = props
     const [loading, setLoading] = useState(false)
-    const [showMap, setShowMap] = useState(false)
-    const [showCarousel, setShowCarousel] = useState(false)
-    const [artistsToAsk, setArtistsToAsk] = useState(false)
+    const [showCard, setShowCard] = useState(true)
+    
 
     async function startFirstPhase(latLong) {
         setLoading(true)
-        console.log('start1')
-        console.log(latLong)
-        const result = await startAI(latLong) //TODO tratar parámetro
-        setArtistsToAsk(result.data.artistsToAsk)
-        setShowCarousel(true)
-        await getUserInfoFetch()
-        setLoading(false)
+        await startAI(latLong)
     }
 
     async function saveUserSelection(userSelectionObject) {
         setLoading(true)
-        const result = await setUserSelection(userSelectionObject)
-        //TODO result
-        await getUserInfoFetch()
-        setLoading(false)
+        setShowCard(true)
+        await setUserSelection(userSelectionObject)
     }
 
     return (
-        !showMap
+        showCard
             ?
             <CenterContainer show={true}>
                 <Card loading={loading} withBackground={true} width='700px' height='600px'>
@@ -96,7 +88,7 @@ function StartLayout(props) {
                         </Title>
                     </TextContainer>
 
-                    <StartButton onClick={() => { setShowMap(true) }}>
+                    <StartButton onClick={() => { setShowCard(false) }}>
                         <ButtonText>
                             Start
                         </ButtonText>
@@ -104,11 +96,11 @@ function StartLayout(props) {
                 </Card>
             </CenterContainer>
             :
-            !showCarousel
+            (!userInfo.artistsToAsk || userInfo.artistsToAsk.length === 0)
                 ?
                 <MapLayout loading={loading} withBackground={true} startFirstPhase={startFirstPhase} />
                 :
-                <ArtistsCarouselLayout items={artistsToAsk} saveUserSelection={saveUserSelection} />
+                <ArtistsCarouselLayout items={userInfo.artistsToAsk} saveUserSelection={saveUserSelection} />
     )
 }
 
