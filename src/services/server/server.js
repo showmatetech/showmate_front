@@ -9,9 +9,13 @@ const LOCALSTORAGE_VALUES = {
     accessToken: window.localStorage.getItem(LOCALSTORAGE_KEYS.accessToken),
 }
 
-export const startAI = async () => {
+export const startAI = async (latLong) => {
     try {
-        const { data } = await axios.get(`${EVENTS_URL}/start?access_token=${LOCALSTORAGE_VALUES.accessToken}`)
+        const { data } = await axios.post(`${EVENTS_URL}/start?access_token=${LOCALSTORAGE_VALUES.accessToken}`,
+        {
+            lat: latLong.lat,
+            long: latLong.long
+        })
         if (data.status === 200) {
             console.log(data)
             return { success: true, data: data }

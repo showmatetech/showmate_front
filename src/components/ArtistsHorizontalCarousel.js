@@ -87,16 +87,15 @@ const ActionButton = styled.button`
 
 function ArtistsHorizontalCarousel(props) {
     const SLICE = 15
-    const { items, setUserSelection } = props
+    const { items, saveUserSelection } = props
     const carouselRef = useRef(null)
     const [itemIndex, setItemIndex] = useState(0)
     const [likedItems, setLikedItems] = useState([])
     const [discardedItems, setDiscardedItems] = useState([])
-    const [finish, setFinish] = useState(false)
 
     function checkSlice() {
-        if (itemIndex >= (SLICE - 1) && discardedItems.length >= 5) {
-            setFinish(true)
+        if (itemIndex >= (SLICE - 1) && discardedItems.length >= 5) { //TODO añadir condición a los elegidos tb
+            saveUserSelection({likedItems, discardedItems})
             return true
         }
         return false
@@ -124,21 +123,16 @@ function ArtistsHorizontalCarousel(props) {
         }
     }
 
-    useEffect(() => {
-        if (finish) {
-            console.log('FINISH')
-            setUserSelection({likedItems, discardedItems})
-        }
-    }, [finish])
-
     return (
         <>
             <CenterContainer>
                 <Carousel itemsToShow={1} itemPadding={[300, 30, 300, 30]} transitionMs={700} pagination={false} showArrows={false} ref={carouselRef} enableSwipe={false} enableMouseSwipe={false}>
                     {items.map((item, index) => {
-                        return (
-                            <ArtistCard item={item} />
-                        )
+                        if (item && item !== null){
+                            return (
+                                <ArtistCard item={item} />
+                            )
+                        }
                     })}
                 </Carousel>
             </CenterContainer>

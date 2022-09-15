@@ -1,7 +1,7 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import styled from 'styled-components'
 import Card from '../../components/Card';
-import SearchableMap from '../../components/SearchableMap';
+import HorizontalCarousel from '../../components/HorizontalCarousel';
 
 const CenterContainer = styled.div`
     display: flex;
@@ -22,18 +22,15 @@ const CenterContainer = styled.div`
 const TextContainer = styled.div`
     max-width: 500px;
     min-width: 250px;
+    margin-bottom: 40px;
     margin-left: 20px;
     margin-right: 20px;
 `
 const Title = styled.h1`
-    font-size: 45px;
+    font-size: 55px;
     color: rgba(56, 56, 56, 1);
     font-family: "BlinkerBold";
 `;
-
-const ButtonContainer = styled.div`
-    margin-top: 30px;
-`
 
 const StartButton = styled.button`
 flex-direction: column;
@@ -60,28 +57,30 @@ const ButtonText = styled.h1`
   margin-top: 16px;
 `
 
-function InformativeLayout(props) {
-    const { loading, startFirstPhase } = props
-    const [latLong, setLatLong] = useState({lat: 0, long: 0})
+function FinishLayout(props) {
+    const { loading, eventsParsed } = props
+    const [showResults, setShowResults] = useState(false)
     return (
-        <CenterContainer show={true}>
-            <Card loading={loading} withBackground={true} width='700px' height='600px'>
-                <TextContainer>
-                    <Title>
-                        TODO
-                    </Title>
-                </TextContainer>
-                    <SearchableMap setLatLong={setLatLong} />
-                <ButtonContainer>
-                    <StartButton onClick={()=>{startFirstPhase(latLong)}}>
+        !showResults
+            ?
+            <CenterContainer show={true}>
+                <Card loading={loading} withBackground={true} width='700px' height='600px'>
+                    <TextContainer>
+                        <Title>
+                            Ya tenemos los resultados
+                        </Title>
+                    </TextContainer>
+
+                    <StartButton onClick={() => { setShowResults(true) }}>
                         <ButtonText>
-                            Send
+                            See results
                         </ButtonText>
                     </StartButton>
-                </ButtonContainer>
-            </Card>
-        </CenterContainer>
+                </Card>
+            </CenterContainer>
+            :
+            <HorizontalCarousel items={eventsParsed} />
     )
 }
 
-export default InformativeLayout
+export default FinishLayout

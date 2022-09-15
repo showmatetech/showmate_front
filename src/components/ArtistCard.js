@@ -107,7 +107,7 @@ function ArtistCard(props) {
     return (
         <HorizontalCard withBackground={true} width='400px' height='600px'>
             <Container>
-                <Image src={item.images ? item.images[0].url : 'https://i0.wp.com/www.un.org/pga/73/wp-content/uploads/sites/53/2018/09/Dummy-image-1.jpg?ssl=1'} />
+                <Image src={item.images[0] ? item.images[0].url : 'https://i0.wp.com/www.un.org/pga/73/wp-content/uploads/sites/53/2018/09/Dummy-image-1.jpg?ssl=1'} />
                 <InfoContainer>
                     <InfoTitle>
                         {item.name ? item.name : '---'}
