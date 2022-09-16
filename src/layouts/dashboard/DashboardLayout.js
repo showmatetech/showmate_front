@@ -7,7 +7,9 @@ import FinishLayout from './FinishLayout';
 import { getEventsStatusURL } from '../../services/server/server'
 
 function DashboardLayout(props) {
+
     const [userInfo, setUserInfo] = useState(false)
+
 
     useEffect(() => {
         const url = getEventsStatusURL()
@@ -36,6 +38,7 @@ function DashboardLayout(props) {
         const userStatus = userInfo.status
         const email = userInfo.email
         if (userStatus === 'INITIAL_STATE') {
+
             return (
                 <StartLayout />
             )

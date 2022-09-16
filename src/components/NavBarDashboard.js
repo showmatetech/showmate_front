@@ -1,9 +1,9 @@
 import React from "react";
 import styled from 'styled-components'
-import { DotWave } from '@uiball/loaders'
 import { MdOutlineExitToApp } from "react-icons/md";
 import { HiRefresh } from "react-icons/hi";
-import { logout, refreshToken } from '../services/spotify/spotify';
+import { logout } from '../services/spotify/spotify';
+import { restart } from '../services/server/server';
 import smallLogo from '../static/img/LOGONOBGNOMOT.png';
 
 const NavContainer = styled.div`
@@ -62,13 +62,18 @@ const ActionButton = styled.button`
 `;
 
 const Image = styled.img`
-width: 120px;
-src: ${props => (props.src ? props.src : '')};
+    width: 120px;
+    src: ${props => (props.src ? props.src : '')};
 `
 
 
 function NavBarDashboard(props) {
-    const { loading, isOpen } = props
+    const { isOpen } = props
+
+    async function handleRestart() {
+        await restart()
+    }
+    
     return (
         <NavContainer isOpen={isOpen}>
             <Card>
@@ -76,7 +81,7 @@ function NavBarDashboard(props) {
                     <Image src={smallLogo} />
                 </LogoContainer>
                 <ActionsContainer>
-                    <ActionButton onClick={refreshToken}>
+                    <ActionButton onClick={handleRestart}>
                         <HiRefresh style={{ color: 'rgba(38, 38, 38, 1)', fontSize: '25px', }} />
                     </ActionButton>
                     <ActionButton onClick={logout}>

@@ -90,6 +90,20 @@ export const getUserInfo = async () => {
     }
 }
 
+export const restart = async () => {
+    try {
+        const { data } = await axios.get(`${EVENTS_URL}/restart?access_token=${LOCALSTORAGE_VALUES.accessToken}`)
+        if (data.status === 200) {
+            console.log(data)
+            return { success: true }
+        } else {
+            return { success: false }
+        }
+    } catch (err) {
+        return { success: false }
+    }
+}
+
 export const getEventsStatusURL = () => {
     return `${EVENTS_URL}/status?access_token=${LOCALSTORAGE_VALUES.accessToken}`
 }
