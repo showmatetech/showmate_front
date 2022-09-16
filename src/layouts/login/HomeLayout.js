@@ -29,11 +29,17 @@ const HomeTitleContainer = styled.div`
     margin-right: 20px;
 `
 
-const HomeTitle = styled.h1`
+const Title = styled.h1`
     font-size: 55px;
     color: rgba(56, 56, 56, 1);
-    font-family: "BlinkerLight";
-`
+    font-family: "BlinkerBold";
+`;
+
+const SubTitle = styled.h1`
+    font-size: 16px;
+    color: rgba(56, 56, 56, 1);
+    font-family: "BlinkerRegular";
+`;
 
 const HomeButtonContainer = styled.div`
 `
@@ -63,25 +69,24 @@ const HomeButtonText = styled.h1`
 `
 
 const HomeInput = styled.input`
-    margin-bottom: 70px;
+    margin-bottom: 50px;
     margin-left: 20px;
     margin-right: 20px;
+    padding-left: 15px;
 
     font-size: 20px;
     color: rgba(56, 56, 56, 1);
     font-family: "BlinkerRegular";
 
-    width: 40%;
+    width: 38%;
     height: 40px;
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.3);
     border-radius: 10px;
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     border: 1px solid rgba(255, 255, 255, 0.2);
-
 `
-
 
 function HomeLayout(props) {
   const { show } = props
@@ -103,12 +108,15 @@ function HomeLayout(props) {
     <CenterContainer show={show}>
       <Card withBackground={true} width='700px' height='600px'>
         <HomeTitleContainer>
-          <HomeTitle>
-            BETA! Escribe tu email:
-          </HomeTitle>
+          <Title>
+            ¡Showmate está todavía en beta!
+          </Title>
+          <SubTitle>
+            Si quieres formar parte del programa beta, introduce a continuación el email asociado a tu cuenta de Spotify. Te enviaremos un email cuando estés dentro del programa.
+          </SubTitle>
         </HomeTitleContainer>
 
-        <HomeInput type="text" value={email} onChange={update} />
+        <HomeInput type="text" value={email} onChange={update} placeholder="email"/>
 
         <HomeButtonContainer>
           <HomeButton onClick={sendEmail}>

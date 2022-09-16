@@ -9,16 +9,12 @@ const LOCALSTORAGE_VALUES = {
     accessToken: window.localStorage.getItem(LOCALSTORAGE_KEYS.accessToken),
 }
 
-export const startAI = async (latLong) => {
+export const startAI = async () => {
     try {
-        const { data } = await axios.post(`${EVENTS_URL}/start?access_token=${LOCALSTORAGE_VALUES.accessToken}`,
-        {
-            lat: latLong.lat,
-            long: latLong.long
-        })
+        const { data } = await axios.get(`${EVENTS_URL}/start?access_token=${LOCALSTORAGE_VALUES.accessToken}`)
         if (data.status === 200) {
             console.log(data)
-            return { success: true, data: data }
+            return { success: true }
         } else {
             return { success: false }
         }
@@ -27,12 +23,16 @@ export const startAI = async (latLong) => {
     }
 }
 
-export const getUserInfo = async () => {
+export const setLocation = async (latLong) => {
     try {
-        const { data } = await axios.get(`${EVENTS_URL}/user?access_token=${LOCALSTORAGE_VALUES.accessToken}`)
+        const { data } = await axios.post(`${EVENTS_URL}/location?access_token=${LOCALSTORAGE_VALUES.accessToken}`,
+        {
+            lat: latLong.lat,
+            long: latLong.long
+        })
         if (data.status === 200) {
             console.log(data)
-            return { success: true, data: data.userInfo }
+            return { success: true, data: data }
         } else {
             return { success: false }
         }
@@ -68,6 +68,20 @@ export const createUser = async (email) => {
         if (data.status === 200) {
             console.log(data)
             return { success: true, data: data }
+        } else {
+            return { success: false }
+        }
+    } catch (err) {
+        return { success: false }
+    }
+}
+
+export const getUserInfo = async () => {
+    try {
+        const { data } = await axios.get(`${EVENTS_URL}/user?access_token=${LOCALSTORAGE_VALUES.accessToken}`)
+        if (data.status === 200) {
+            console.log(data)
+            return { success: true, data: data.userInfo }
         } else {
             return { success: false }
         }

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import _ from "lodash";
 import StartLayout from './StartLayout';
+import ArtistSelectionLayout from './ArtistSelectionLayout';
 import CollectingLayout from './CollectingLayout';
 import FinishLayout from './FinishLayout';
 import { getEventsStatusURL } from '../../services/server/server'
 
 function DashboardLayout(props) {
-    const { initialUserInfo } = props
     const [userInfo, setUserInfo] = useState(false)
 
     useEffect(() => {
@@ -37,7 +37,13 @@ function DashboardLayout(props) {
         const email = userInfo.email
         if (userStatus === 'INITIAL_STATE') {
             return (
-                <StartLayout userInfo={userInfo} />
+                <StartLayout />
+            )
+        }
+
+        if (userStatus === 'WAITING_SELECTION') {
+            return (
+                <ArtistSelectionLayout userInfo={userInfo} />
             )
         }
 
@@ -66,7 +72,7 @@ function DashboardLayout(props) {
             )
         }
     }
-    
+
     if (userInfo) {
         return (
             getLayout()

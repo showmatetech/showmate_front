@@ -26,7 +26,7 @@ const TextContainer = styled.div`
     margin-right: 20px;
 `
 const Title = styled.h1`
-    font-size: 45px;
+    font-size: 30px;
     color: rgba(56, 56, 56, 1);
     font-family: "BlinkerBold";
 `;
@@ -68,7 +68,7 @@ function InformativeLayout(props) {
             <Card loading={loading} withBackground={true} width='700px' height='600px'>
                 <TextContainer>
                     <Title>
-                        TODO
+                        Selecciona la ubicación donde quieres encontrar conciertos
                     </Title>
                 </TextContainer>
                     <SearchableMap setLatLong={setLatLong} />

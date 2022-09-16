@@ -31,9 +31,9 @@ const LoginTitleContainer = styled.div`
 `
 
 const LoginTitle = styled.h1`
-    font-size: 55px;
-    color: rgba(56, 56, 56, 1);
-    font-family: "BlinkerLight";
+  font-size: 55px;
+  color: rgba(56, 56, 56, 1);
+  font-family: "BlinkerBold";
 `
 
 const LoginButtonContainer = styled.div`

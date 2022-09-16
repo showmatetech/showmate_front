@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import styled from 'styled-components'
 import Card from '../../components/Card';
-import MapLayout from './MapLayout';
+import ArtistsCarouselLayout from './ArtistsCarouselLayout';
 import { Waveform } from '@uiball/loaders'
-import { startAI, setLocation } from '../../services/server/server'
+import { setUserSelection } from '../../services/server/server'
 
 
 const CenterContainer = styled.div`
@@ -41,6 +41,10 @@ const SubTitle = styled.h1`
     font-family: "BlinkerRegular";
 `;
 
+const LoaderContainer = styled.div`
+  padding: 10px;
+`
+
 const StartButton = styled.button`
 flex-direction: column;
 align-items: center;
@@ -65,32 +69,31 @@ const ButtonText = styled.h1`
   font-family: "BlinkerBold";
   margin-top: 16px;
 `
-const LoaderContainer = styled.div`
-  padding: 10px;
-`
 
-function StartLayout() {
+function ArtistSelectionLayout(props) {
+    const { userInfo } = props
     const [loading, setLoading] = useState(false)
-    const [title, setTitle] = useState('Click to start the magic')
-    const [subtitle, setSubtitle] = useState('')
-    const [showMap, setShowMap] = useState(false)
+    const [title, setTitle] = useState('Selecciona si te gustan o no estos artistas')
+    const [subtitle, setSubtitle] = useState('Puedes escuchar 30 segundos de la canción más relevante actualmente de cada uno de ellos')
+    const [showCarousel, setShowCarousel] = useState(false)
 
-    async function startLocationSelection() {
-        await startAI()
-        setShowMap(true)
+
+    async function startArtistsSelection() {
+        setShowCarousel(true)
     }
 
-    async function startFirstPhase(latLong) {
-        setShowMap(false)
+    async function saveUserSelection(userSelectionObject) {
+        setShowCarousel(false)
         setLoading(true)
-        setTitle('Estamos procesando la ubicación')
-        setSubtitle('Ahora te mostraremos una lista de artistas. Tendrás que seleccionar si te gusta o no cada uno. Esto nos pemitirá conocer mejor tus gustos.')
-        await setLocation(latLong)
+        setTitle('Estamos procesando tus respuestas')
+        setSubtitle('')
+        await setUserSelection(userSelectionObject)
     }
 
-    if (showMap) {
+
+    if (showCarousel) {
         return (
-            <MapLayout withBackground={true} startFirstPhase={startFirstPhase} />
+            <ArtistsCarouselLayout items={userInfo.artistsToAsk} saveUserSelection={saveUserSelection} />
         )
     }
     else {
@@ -117,7 +120,7 @@ function StartLayout() {
                             />
                         </LoaderContainer>
                         :
-                        <StartButton onClick={() => { startLocationSelection() }}>
+                        <StartButton onClick={() => { startArtistsSelection() }}>
                             <ButtonText>
                                 Start
                             </ButtonText>
@@ -129,4 +132,4 @@ function StartLayout() {
     }
 }
 
-export default StartLayout
+export default ArtistSelectionLayout
