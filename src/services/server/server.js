@@ -59,6 +59,24 @@ export const setUserSelection = async (selection) => {
     }
 }
 
+export const setEventsUserSelection = async (selection) => {
+    try {
+        const { data } = await axios.post(`${EVENTS_URL}/eventsselection?access_token=${LOCALSTORAGE_VALUES.accessToken}`,
+            {
+                likedItems: selection.likedItems,
+                discardedItems: selection.discardedItems
+            })
+        if (data.status === 200) {
+            console.log(data)
+            return { success: true, data: data }
+        } else {
+            return { success: false }
+        }
+    } catch (err) {
+        return { success: false }
+    }
+}
+
 export const createUser = async (email) => {
     try {
         const { data } = await axios.post(`${EVENTS_URL}/user/create`,

@@ -11,8 +11,8 @@ const CenterContainer = styled.div`
     align-items: center;
     justify-content: center;
     position: absolute;
-    top: ${props => (props.show ? `50%` : `200%`)};
-    bottom: ${props => (props.show ? `50%` : '0%')};
+    top: ${props => (props.show ? `53%` : `200%`)};
+    bottom: ${props => (props.show ? `47%` : '0%')};
     right: 10%;
     left: 10%;
 
@@ -25,9 +25,9 @@ const CenterContainer = styled.div`
 const TextContainer = styled.div`
     max-width: 500px;
     min-width: 250px;
-    margin-bottom: 40px;
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-bottom: 5%;
+    margin-left: 10%;
+    margin-right: 10%;
 `
 const Title = styled.h1`
     font-size: 55px;
@@ -42,9 +42,9 @@ const SubTitle = styled.h1`
 `;
 
 const StartButton = styled.button`
-flex-direction: column;
-align-items: center;
-justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     transition: all .3s ease;
     cursor: pointer;
     width: 200px;
@@ -96,7 +96,7 @@ function StartLayout() {
     else {
         return (
             <CenterContainer show={true}>
-                <Card withBackground={true} width='700px' height='600px'>
+                <Card withBackground={true} width='700px' height='60vh'>
                     <TextContainer>
                         <Title>
                             {title}

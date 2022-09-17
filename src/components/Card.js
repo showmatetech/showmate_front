@@ -8,8 +8,8 @@ const CardComponent = styled.div`
     justify-content: center;
     text-align: center;
 
-    width: ${props => (props.width ? props.width : `900px`)};
-    height: ${props => (props.width ? props.height : `600px`)};
+    width: ${props => (props.width ? props.width : `700px`)};
+    height: ${props => (props.width ? props.height : `60vh`)};
 
     background: ${props => (props.withBackground ? `rgba(255, 255, 255, 0.25);` : ``)}; 
     border-radius: ${props => (props.withBackground ? `30px;` : ``)};

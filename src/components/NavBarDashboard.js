@@ -72,6 +72,7 @@ function NavBarDashboard(props) {
 
     async function handleRestart() {
         await restart()
+        window.location.reload(true);
     }
     
     return (

@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import styled from 'styled-components'
 import Card from '../../components/Card';
-import HorizontalCarousel from '../../components/HorizontalCarousel';
+import EventsCarousel from '../../components/EventsCarousel';
+import { setEventsUserSelection } from '../../services/server/server'
+
 
 const CenterContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
     position: absolute;
-    top: ${props => (props.show ? `50%` : `200%`)};
-    bottom: ${props => (props.show ? `50%` : '0%')};
+    top: ${props => (props.show ? `53%` : `200%`)};
+    bottom: ${props => (props.show ? `47%` : '0%')};
     right: 10%;
     left: 10%;
 
@@ -22,9 +24,9 @@ const CenterContainer = styled.div`
 const TextContainer = styled.div`
     max-width: 500px;
     min-width: 250px;
-    margin-bottom: 40px;
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-bottom: 5%;
+    margin-left: 10%;
+    margin-right: 10%;
 `
 const Title = styled.h1`
     font-size: 55px;
@@ -33,6 +35,7 @@ const Title = styled.h1`
 `;
 
 const StartButton = styled.button`
+margin-bottom: 10%;
 flex-direction: column;
 align-items: center;
 justify-content: center;
@@ -60,11 +63,16 @@ const ButtonText = styled.h1`
 function FinishLayout(props) {
     const { loading, eventsParsed } = props
     const [showResults, setShowResults] = useState(false)
+
+    async function saveUserSelection(userSelectionObject) {
+        await setEventsUserSelection(userSelectionObject) //TODO
+    }
+
     return (
         !showResults
             ?
             <CenterContainer show={true}>
-                <Card loading={loading} withBackground={true} width='700px' height='600px'>
+                <Card loading={loading} withBackground={true} width='700px' height='60vh'>
                     <TextContainer>
                         <Title>
                             Ya tenemos los resultados
@@ -79,7 +87,7 @@ function FinishLayout(props) {
                 </Card>
             </CenterContainer>
             :
-            <HorizontalCarousel items={eventsParsed} />
+            <EventsCarousel items={eventsParsed} saveUserSelection={saveUserSelection}/>
     )
 }
 

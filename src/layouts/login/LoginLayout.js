@@ -64,7 +64,7 @@ function LoginLayout(props) {
   const { show } = props
   return (
     <CenterContainer show={show}>
-      <Card withBackground={true} width='700px' height='600px'>
+      <Card withBackground={true} width='700px' height='60vh'>
         <LoginTitleContainer>
           <LoginTitle>
             Sign in with your Spotify account and our AI will do the magic

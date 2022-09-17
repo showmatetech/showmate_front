@@ -106,7 +106,7 @@ function HomeLayout(props) {
 
   return (
     <CenterContainer show={show}>
-      <Card withBackground={true} width='700px' height='600px'>
+      <Card withBackground={true} width='700px' height='60vh'>
         <HomeTitleContainer>
           <Title>
             ¡Showmate está todavía en beta!

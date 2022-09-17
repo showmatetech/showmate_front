@@ -86,7 +86,6 @@ const ActionButton = styled.button`
 `;
 
 function ArtistsHorizontalCarousel(props) {
-    const SLICE = 15
     const { items, saveUserSelection } = props
     const carouselRef = useRef(null)
     const [itemIndex, setItemIndex] = useState(0)
@@ -94,7 +93,7 @@ function ArtistsHorizontalCarousel(props) {
     const [discardedItems, setDiscardedItems] = useState([])
 
     function checkSlice() {
-        if (itemIndex >= (SLICE - 1) && discardedItems.length >= 5) { //TODO añadir condición a los elegidos tb
+        if (discardedItems.length >= 10 && likedItems.length >= 10) {
             saveUserSelection({likedItems, discardedItems})
             return true
         }

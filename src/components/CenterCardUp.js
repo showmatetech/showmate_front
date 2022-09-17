@@ -8,8 +8,8 @@ const CenterContainer = styled.div`
     align-items: center;
     justify-content: center;
     position: absolute;
-    top: ${props => (props.show ? `50%` : `200%`)};
-    bottom: ${props => (props.show ? `50%` : '0%')};
+    top: ${props => (props.show ? `53%` : `200%`)};
+    bottom: ${props => (props.show ? `47%` : '0%')};
     right: 10%;
     left: 10%;
 

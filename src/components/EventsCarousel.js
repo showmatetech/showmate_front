@@ -1,8 +1,7 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import styled from 'styled-components'
 import Carousel from 'react-elastic-carousel'
 import EventCard from './EventCard';
-import ArtistCard from './ArtistCard';
 import { ImCross } from "react-icons/im";
 import { ImCheckmark } from "react-icons/im";
 
@@ -16,47 +15,6 @@ const CenterContainer = styled.div`
     right: 5%;
     left: 5%;
 `
-
-const ImageContainer = styled.div`
-    display: flex;
-    flex: 1;
-    justify-content: center;
-    margin-left: 20px;
-    margin-right: 5px;
-`
-
-const Image = styled.img`
-    border-radius: 10%;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-    width: 80%;
-    src: ${props => (props.src ? props.src : '')};
-`
-
-const InfoContainer = styled.div`
-    display: flex;
-    flex: 1;
-    justify-content: center;
-    flex-direction: column;
-    margin-left: 5px;
-    margin-right: 20px;
-`
-const InfoTitle = styled.h1`
-    width: 90%;
-    margin-bottom: 10px;
-    margin-top: 0px;
-    font-size: 35px;
-    color: rgba(56, 56, 56, 1);
-    font-family: "BlinkerBold";
-`;
-
-const InfoSubTitle = styled.h1`
-    width: 90%;
-    margin-bottom: 2px;
-    margin-top: 2px;
-    font-size: 20px;
-    color: rgba(56, 56, 56, 1);
-    font-family: "BlinkerLight";
-`;
 
 const ButtonContainer = styled.div`
     display: flex;
@@ -86,30 +44,53 @@ const ActionButton = styled.button`
     }
 `;
 
-function HorizontalCarousel(props) {
-    const { items, discardEventAction, saveEventAction  } = props
+function EventsCarousel(props) {
+    const { items, saveUserSelection } = props
     const carouselRef = useRef(null)
+    const [itemIndex, setItemIndex] = useState(0)
+    const [likedItems, setLikedItems] = useState([])
+    const [discardedItems, setDiscardedItems] = useState([])
+
+    function checkFinish() {
+        if (items.length === itemIndex) {
+            saveUserSelection({ likedItems, discardedItems })
+            return true
+        }
+        return false
+    }
 
     function discardEvent() {
-        carouselRef.current.slideNext()
-        if (discardEventAction) discardEventAction()
+        console.log({ itemIndex, likedItems, discardedItems })
+        const discardedItemsAux = discardedItems
+        discardedItemsAux.push(items[itemIndex])
+        setDiscardedItems(discardedItemsAux)
+        setItemIndex(itemIndex + 1)
+        if (!checkFinish()) {
+            carouselRef.current.slideNext()
+        }
     }
 
     function saveEvent() {
-        carouselRef.current.slideNext()
-        if (saveEventAction) saveEventAction()
+        console.log({ itemIndex, likedItems, discardedItems })
+        const likedItemsAux = likedItems
+        likedItemsAux.push(items[itemIndex])
+        setLikedItems(likedItemsAux)
+        setItemIndex(itemIndex + 1)
+        if (!checkFinish()) {
+            carouselRef.current.slideNext()
+        }
     }
 
     return (
         <>
-        <CenterContainer>
-            <Carousel itemsToShow={1} itemPadding={[300, 30, 300, 30]} transitionMs={700} pagination={false} showArrows={false} ref={carouselRef} enableSwipe={false} enableMouseSwipe={false}>
-                {items.map((item, index) => {
-                    return (
-                        <EventCard item={item}/>
-                    )
-                })}
-            </Carousel>
+            <CenterContainer>
+                <Carousel itemsToShow={1} itemPadding={[300, 30, 300, 30]} transitionMs={700} pagination={false} showArrows={false} ref={carouselRef} enableSwipe={false} enableMouseSwipe={false}>
+                    {items.map((item, index) => {
+                        return (
+                            <EventCard item={item} />
+                        )
+                    })}
+                </Carousel>
             </CenterContainer>
             <ButtonContainer >
                 <ActionButton onClick={() => { saveEvent() }}>
@@ -123,4 +104,4 @@ function HorizontalCarousel(props) {
     )
 }
 
-export default HorizontalCarousel
+export default EventsCarousel

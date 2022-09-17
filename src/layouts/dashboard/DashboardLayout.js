@@ -36,15 +36,16 @@ function DashboardLayout(props) {
 
     function getLayout() {
         const userStatus = userInfo.status
+        const hasLocation = (userInfo.location && userInfo.location.lat && userInfo.location.long)
         const email = userInfo.email
-        if (userStatus === 'INITIAL_STATE') {
+        if (userStatus === 'INITIAL_STATE' || !hasLocation) {
 
             return (
-                <StartLayout />
+                <StartLayout userInfo={userInfo}/>
             )
         }
 
-        if (userStatus === 'WAITING_SELECTION') {
+        if (userStatus === 'WAITING_SELECTION' && hasLocation) {
             return (
                 <ArtistSelectionLayout userInfo={userInfo} />
             )

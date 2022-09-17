@@ -31,7 +31,7 @@ const SearchableMap = (props) => {
   };
 
   useEffect(() => {
-    setLatLong({lat: (viewport.latitude).toFixed(3), long: (viewport.longitude).toFixed(3)})
+    setLatLong({lat: (viewport.latitude).toFixed(1), long: (viewport.longitude).toFixed(1)})
   }, [setLatLong, viewport]);
 
   return (
