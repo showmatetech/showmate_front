@@ -7,6 +7,8 @@ const ImageContainer = styled.div`
     display: flex;
     flex: 1;
     justify-content: center;
+    height: 75%;
+    width: 75%;
     margin-left: 20px;
     margin-right: 5px;
 `
@@ -14,7 +16,10 @@ const ImageContainer = styled.div`
 const Image = styled.img`
     border-radius: 10%;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-    width: 80%;
+    width: auto;
+    height: 100%;
+    aspect-ratio: 1; /* will make width equal to height (500px container) */
+    object-fit: cover; /* use the one you need */
     src: ${props => (props.src ? props.src : '')};
 `
 
@@ -30,9 +35,9 @@ const InfoTitle = styled.h1`
     width: 90%;
     margin-bottom: 10px;
     margin-top: 0px;
-    font-size: 35px;
+    font-size: calc(1vh * 2.5);
     color: rgba(56, 56, 56, 1);
-    font-family: "BlinkerBold";
+    font-family: "HelveticaNeueBold";
 `;
 
 const InfoSubTitle = styled.h1`
@@ -97,19 +102,19 @@ function EventCard(props) {
                     {item.title}
                 </InfoTitle>
                 <InfoSubTitle>
-                    Artist: {item.artist}
+                    Artista: {item.artist}
                 </InfoSubTitle>
                 <InfoSubTitle>
-                    Location: {item.location}
+                    Localización: {item.location}
                 </InfoSubTitle>
                 <InfoSubTitle>
-                    Date: {item.date}
+                    Fecha: {item.date}
                 </InfoSubTitle>
                 <InfoSubTitle>
-                    Venue: {item.venue}
+                    Lugar: {item.venue}
                 </InfoSubTitle>
                 <InfoSubTitle>
-                    Type: {item.type}
+                    Tipo: {item.type}
                 </InfoSubTitle>
                 {item.trackUrl ?
                     <AudioPlayer

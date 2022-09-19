@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import styled from 'styled-components'
 import Card from '../../components/Card';
-import MapLayout from './MapLayout';
-import { Waveform } from '@uiball/loaders'
-import { startAI, setLocation } from '../../services/server/server'
+import EventsSelectionCarousel from '../../components/EventsSelectionCarousel';
 
 
 const CenterContainer = styled.div`
@@ -23,7 +21,7 @@ const CenterContainer = styled.div`
     transition: all  0.9s 0.4s ease; 
 `
 const TextContainer = styled.div`
-    max-width: 500px;
+    max-width: 700px;
     min-width: 250px;
     margin-bottom: 5%;
     margin-left: 10%;
@@ -36,9 +34,10 @@ const Title = styled.h1`
 `;
 
 const StartButton = styled.button`
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+margin-bottom: 5%;
+flex-direction: column;
+align-items: center;
+justify-content: center;
     transition: all .3s ease;
     cursor: pointer;
     width: 200px;
@@ -54,36 +53,24 @@ const StartButton = styled.button`
     }
 `
 const ButtonText = styled.h1`
-  font-size: 30px;
+  font-size: 22px;
   color: rgba(56, 56, 56, 1);
   font-family: "HelveticaNeueBold";
   margin-top: 16px;
 `
-const LoaderContainer = styled.div`
-  padding: 10px;
-`
 
-function StartLayout() {
-    const [loading, setLoading] = useState(false)
-    const [title, setTitle] = useState('¿Estás listo para comenzar?')
-    const [showMap, setShowMap] = useState(false)
+function EventsSelectionLayout(props) {
+    const { userInfo, likedItems, discardedItems } = props
+    const [eventsSeleccion, setEventsSeleccion] = useState(false)
 
-    async function startLocationSelection() {
-        await startAI()
-        setShowMap(true)
+    function goHome() {
+        setEventsSeleccion(false)
     }
 
-    async function startFirstPhase(latLong) {
-        setShowMap(false)
-        setLoading(true)
-        setTitle('Estamos procesando la ubicación')
-        await setLocation(latLong)
-    }
-
-
-    if (showMap) {
+    if (eventsSeleccion) {
+        console.log(eventsSeleccion)
         return (
-            <MapLayout withBackground={true} startFirstPhase={startFirstPhase} />
+            <EventsSelectionCarousel items={eventsSeleccion} goHome={goHome} />
         )
     }
     else {
@@ -92,31 +79,25 @@ function StartLayout() {
                 <Card withBackground={true} width='700px' height='60vh'>
                     <TextContainer>
                         <Title>
-                            {title}
+                            Explora tus elecciones y ¡a disfrutar!
                         </Title>
                     </TextContainer>
 
-                    {loading
-                        ?
-                        <LoaderContainer>
-                            <Waveform
-                                size={50}
-                                lineWeight={3.5}
-                                speed={1}
-                                color="rgba(56, 56, 56, 1)"
-                            />
-                        </LoaderContainer>
-                        :
-                        <StartButton onClick={() => { startLocationSelection() }}>
-                            <ButtonText>
-                                ¡Vamos!
-                            </ButtonText>
-                        </StartButton>
-                    }
+                    <StartButton onClick={() => { setEventsSeleccion(likedItems) }}>
+                        <ButtonText>
+                            Me interesan
+                        </ButtonText>
+                    </StartButton>
+
+                    <StartButton onClick={() => { setEventsSeleccion(discardedItems) }}>
+                        <ButtonText>
+                            No me interesan
+                        </ButtonText>
+                    </StartButton>
                 </Card>
             </CenterContainer>
         )
     }
 }
 
-export default StartLayout
+export default EventsSelectionLayout

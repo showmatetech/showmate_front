@@ -32,7 +32,7 @@ const HomeTitleContainer = styled.div`
 const Title = styled.h1`
     font-size: 55px;
     color: rgba(56, 56, 56, 1);
-    font-family: "BlinkerBold";
+    font-family: "HelveticaNeueBold";
 `;
 
 const SubTitle = styled.h1`
@@ -64,7 +64,7 @@ const HomeButton = styled.button`
 const HomeButtonText = styled.h1`
   font-size: 20px;
   color: rgba(56, 56, 56, 1);
-  font-family: "BlinkerBold";
+  font-family: "HelveticaNeueBold";
   margin-top: 16px;
 `
 
@@ -121,7 +121,7 @@ function HomeLayout(props) {
         <HomeButtonContainer>
           <HomeButton onClick={sendEmail}>
             <HomeButtonText>
-              Send
+              Enviar
             </HomeButtonText>
           </HomeButton>
         </HomeButtonContainer>

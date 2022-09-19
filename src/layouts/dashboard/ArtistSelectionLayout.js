@@ -25,6 +25,7 @@ const CenterContainer = styled.div`
 const TextContainer = styled.div`
     max-width: 500px;
     min-width: 250px;
+    margin-top: 5%;
     margin-bottom: 5%;
     margin-left: 10%;
     margin-right: 10%;
@@ -32,7 +33,7 @@ const TextContainer = styled.div`
 const Title = styled.h1`
     font-size: 55px;
     color: rgba(56, 56, 56, 1);
-    font-family: "BlinkerBold";
+    font-family: "HelveticaNeueBold";
 `;
 
 const SubTitle = styled.h1`
@@ -67,15 +68,15 @@ justify-content: center;
 const ButtonText = styled.h1`
   font-size: 30px;
   color: rgba(56, 56, 56, 1);
-  font-family: "BlinkerBold";
+  font-family: "HelveticaNeueBold";
   margin-top: 16px;
 `
 
 function ArtistSelectionLayout(props) {
     const { userInfo } = props
     const [loading, setLoading] = useState(false)
-    const [title, setTitle] = useState('Selecciona si te gustan o no estos artistas')
-    const [subtitle, setSubtitle] = useState('Puedes escuchar 30 segundos de la canción más relevante actualmente de cada uno de ellos')
+    const [title, setTitle] = useState('Danos tu opinión sobre estos artistas')
+    const [subtitle, setSubtitle] = useState('A continuación, te mostraremos una lista de artistas. Déjate llevar, explora y dinos qué piensas de cada uno de ellos. Esto nos permitirá conocer mejor tus gustos.')
     const [showCarousel, setShowCarousel] = useState(false)
 
 
@@ -123,7 +124,7 @@ function ArtistSelectionLayout(props) {
                         :
                         <StartButton onClick={() => { startArtistsSelection() }}>
                             <ButtonText>
-                                Start
+                                ¡Vamos!
                             </ButtonText>
                         </StartButton>
                     }

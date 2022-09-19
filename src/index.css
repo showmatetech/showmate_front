@@ -23,7 +23,7 @@ code {
 }
 
 @font-face {
-  font-family: "BlinkerBold";
+  font-family: "HelveticaNeueBold";
   src: local("Blinker"),
     url("./static/fonts/blinker/Blinker-Bold.ttf") format("truetype");
 }
@@ -44,4 +44,10 @@ code {
   font-family: "BlinkerThin";
   src: local("Blinker"),
     url("./static/fonts/blinker/Blinker-Thin.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "HelveticaNeueBold";
+  src: local("HelveticaNeue"),
+    url("./static/fonts/HelveticaNeue/HelveticaNeueCyr-Bold.ttf") format("truetype");
 }

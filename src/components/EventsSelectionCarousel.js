@@ -2,8 +2,9 @@ import React, { useRef, useState } from "react";
 import styled from 'styled-components'
 import Carousel from 'react-elastic-carousel'
 import EventCard from './EventCard';
-import { ImCross } from "react-icons/im";
-import { ImCheckmark } from "react-icons/im";
+import { IoMdArrowRoundBack } from "react-icons/io";
+import { IoMdArrowRoundForward } from "react-icons/io";
+import { AiOutlineHome } from "react-icons/ai";
 
 const CenterContainer = styled.div`
     display: flex;
@@ -44,45 +45,20 @@ const ActionButton = styled.button`
     }
 `;
 
-function EventsCarousel(props) {
-    const { items, saveUserSelection } = props
+function EventsSelectionCarousel(props) {
+    const { items, goHome } = props
     const carouselRef = useRef(null)
-    const [itemIndex, setItemIndex] = useState(0)
-    const [likedItems, setLikedItems] = useState([])
-    const [discardedItems, setDiscardedItems] = useState([])
 
-    function checkFinish(index) {
-        console.log(items.length)
-        console.log(index)
-        if (items.length === index) {
-            saveUserSelection({ likedItems, discardedItems })
-            return true
-        }
-        return false
+
+    function prevEvent() {
+        carouselRef.current.slidePrev()
     }
 
-    function discardEvent() {
-        console.log(carouselRef.current)
-        console.log({ itemIndex, likedItems, discardedItems })
-        const discardedItemsAux = discardedItems
-        discardedItemsAux.push(items[itemIndex])
-        setDiscardedItems(discardedItemsAux)
-        setItemIndex(itemIndex + 1)
-        if (!checkFinish(itemIndex + 1)) {
-            carouselRef.current.slideNext()
-        }
+    function nextEvent() {
+        carouselRef.current.slideNext()
     }
 
-    function saveEvent() {
-        console.log({ itemIndex, likedItems, discardedItems })
-        const likedItemsAux = likedItems
-        likedItemsAux.push(items[itemIndex])
-        setLikedItems(likedItemsAux)
-        setItemIndex(itemIndex + 1)
-        if (!checkFinish(itemIndex + 1)) {
-            carouselRef.current.slideNext()
-        }
-    }
+
 
     return (
         <>
@@ -96,15 +72,18 @@ function EventsCarousel(props) {
                 </Carousel>
             </CenterContainer>
             <ButtonContainer >
-                <ActionButton onClick={() => { saveEvent() }}>
-                    <ImCheckmark style={{ color: 'rgba(38, 38, 38, 1)', fontSize: '40px', }} />
+                <ActionButton onClick={() => { prevEvent() }}>
+                    <IoMdArrowRoundBack style={{ color: 'rgba(38, 38, 38, 1)', fontSize: '45px', }} />
                 </ActionButton>
-                <ActionButton onClick={() => { discardEvent() }}>
-                    <ImCross style={{ color: 'rgba(38, 38, 38, 1)', fontSize: '32px', }} />
+                <ActionButton onClick={() => { goHome() }}>
+                    <AiOutlineHome style={{ color: 'rgba(38, 38, 38, 1)', fontSize: '40px', }} />
+                </ActionButton>
+                <ActionButton onClick={() => { nextEvent() }}>
+                    <IoMdArrowRoundForward style={{ color: 'rgba(38, 38, 38, 1)', fontSize: '45px', }} />
                 </ActionButton>
             </ButtonContainer>
         </>
     )
 }
 
-export default EventsCarousel
+export default EventsSelectionCarousel

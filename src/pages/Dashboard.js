@@ -4,11 +4,12 @@ import NavBarDashboard from '../components/NavBarDashboard';
 import DashboardLayout from '../layouts/dashboard/DashboardLayout';
 
 
-function Dashboard() {
+function Dashboard(props) {
+    const { token } = props
     return (
         <MainLayout>
             <NavBarDashboard />
-                <DashboardLayout  />
+                <DashboardLayout  token={token}/>
         </MainLayout>
     )
 }

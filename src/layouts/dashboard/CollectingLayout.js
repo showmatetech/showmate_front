@@ -22,14 +22,14 @@ const CenterContainer = styled.div`
 const TextContainer = styled.div`
     max-width: 500px;
     min-width: 250px;
-    margin-bottom: 5%;
+    margin-bottom: 8%;
     margin-left: 10%;
     margin-right: 10%;
 `
 const Title = styled.h1`
     font-size: 55px;
     color: rgba(56, 56, 56, 1);
-    font-family: "BlinkerBold";
+    font-family: "HelveticaNeueBold";
 `;
 
 const SubTitle = styled.h1`
@@ -49,10 +49,10 @@ function CollectingLayout(props) {
             <Card loading={false} withBackground={true} width='700px' height='60vh'>
                 <TextContainer>
                     <Title>
-                    Our system is looking for the best events for you
+                    Comienza la magia
                     </Title>
                     <SubTitle>
-                    Este proceso puede tardar. Te enviaremos un correo electrónico a {email} cuando nuestra AI haya terminado.
+                    Ahora nos toca a nosotros dar el Do de pecho. Siéntate, relájate y te mandaremos un correo electrónico a {email} cuando estemos listos.
                     </SubTitle>
                 </TextContainer>
                 <LoaderContainer>

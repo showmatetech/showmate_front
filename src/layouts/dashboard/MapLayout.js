@@ -24,11 +24,12 @@ const TextContainer = styled.div`
     min-width: 250px;
     margin-left: 10%;
     margin-right: 10%;
+    margin-bottom: 10px;
 `
 const Title = styled.h1`
-    font-size: 30px;
+    font-size: 32px;
     color: rgba(56, 56, 56, 1);
-    font-family: "BlinkerBold";
+    font-family: "HelveticaNeueBold";
 `;
 
 const ButtonContainer = styled.div`
@@ -57,7 +58,7 @@ justify-content: center;
 const ButtonText = styled.h1`
   font-size: 30px;
   color: rgba(56, 56, 56, 1);
-  font-family: "BlinkerBold";
+  font-family: "HelveticaNeueBold";
   margin-top: 16px;
 `
 
@@ -69,14 +70,14 @@ function InformativeLayout(props) {
             <Card loading={loading} withBackground={true} width='700px' height='60vh'>
                 <TextContainer>
                     <Title>
-                        Selecciona la ubicación donde quieres encontrar conciertos
+                        ¿Dónde quieres ir de concierto?
                     </Title>
                 </TextContainer>
                     <SearchableMap setLatLong={setLatLong} />
                 <ButtonContainer>
                     <StartButton onClick={()=>{startFirstPhase(latLong)}}>
                         <ButtonText>
-                            Send
+                            Enviar
                         </ButtonText>
                     </StartButton>
                 </ButtonContainer>

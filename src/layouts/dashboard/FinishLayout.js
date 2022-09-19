@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import Card from '../../components/Card';
 import EventsCarousel from '../../components/EventsCarousel';
 import { setEventsUserSelection } from '../../services/server/server'
+import { Waveform } from '@uiball/loaders'
 
 
 const CenterContainer = styled.div`
@@ -31,7 +32,13 @@ const TextContainer = styled.div`
 const Title = styled.h1`
     font-size: 55px;
     color: rgba(56, 56, 56, 1);
-    font-family: "BlinkerBold";
+    font-family: "HelveticaNeueBold";
+`;
+
+const SubTitle = styled.h1`
+    font-size: 16px;
+    color: rgba(56, 56, 56, 1);
+    font-family: "BlinkerRegular";
 `;
 
 const StartButton = styled.button`
@@ -54,41 +61,70 @@ justify-content: center;
     }
 `
 const ButtonText = styled.h1`
-  font-size: 30px;
+  font-size: 25px;
   color: rgba(56, 56, 56, 1);
-  font-family: "BlinkerBold";
+  font-family: "HelveticaNeueBold";
   margin-top: 16px;
+`
+const LoaderContainer = styled.div`
+  padding: 10px;
 `
 
 function FinishLayout(props) {
-    const { loading, eventsParsed } = props
+    const { userInfo, eventsParsed } = props
+    const [loading, setLoading] = useState(false)
     const [showResults, setShowResults] = useState(false)
+    const [title, setTitle] = useState('El show está a punto de comenzar')
+    const [subtitle, setSubtitle] = useState('Ya estamos listos. A continuación, puedes elegir si te interesan o no las experiencias que hemos encontrado para ti. Después, podrás acceder al listado completo siempre que quieras.')
+
 
     async function saveUserSelection(userSelectionObject) {
-        await setEventsUserSelection(userSelectionObject) //TODO
+        setShowResults(false)
+        setLoading(true)
+        setTitle('Estamos procesando tu selección')
+        setSubtitle('')
+        await setEventsUserSelection(userSelectionObject)
     }
 
-    return (
-        !showResults
-            ?
+    if (showResults) {
+        return (
+            <EventsCarousel items={eventsParsed} saveUserSelection={saveUserSelection} />
+        )
+    }
+    else {
+        return (
             <CenterContainer show={true}>
-                <Card loading={loading} withBackground={true} width='700px' height='60vh'>
+                <Card withBackground={true} width='700px' height='60vh'>
                     <TextContainer>
                         <Title>
-                            Ya tenemos los resultados
+                            {title}
                         </Title>
+                        <SubTitle>
+                            {subtitle}
+                        </SubTitle>
                     </TextContainer>
 
-                    <StartButton onClick={() => { setShowResults(true) }}>
-                        <ButtonText>
-                            See results
-                        </ButtonText>
-                    </StartButton>
+                    {loading
+                        ?
+                        <LoaderContainer>
+                            <Waveform
+                                size={50}
+                                lineWeight={3.5}
+                                speed={1}
+                                color="rgba(56, 56, 56, 1)"
+                            />
+                        </LoaderContainer>
+                        :
+                        <StartButton onClick={() => { setShowResults(true) }}>
+                            <ButtonText>
+                                It’s show time!
+                            </ButtonText>
+                        </StartButton>
+                    }
                 </Card>
             </CenterContainer>
-            :
-            <EventsCarousel items={eventsParsed} saveUserSelection={saveUserSelection}/>
-    )
+        )
+    }
 }
 
 export default FinishLayout

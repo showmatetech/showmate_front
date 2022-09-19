@@ -4,15 +4,16 @@ import StartLayout from './StartLayout';
 import ArtistSelectionLayout from './ArtistSelectionLayout';
 import CollectingLayout from './CollectingLayout';
 import FinishLayout from './FinishLayout';
+import EventsSelectionLayout from './EventsSelectionLayout';
 import { getEventsStatusURL } from '../../services/server/server'
 
 function DashboardLayout(props) {
-
+    const { token } = props
     const [userInfo, setUserInfo] = useState(false)
 
 
     useEffect(() => {
-        const url = getEventsStatusURL()
+        const url = getEventsStatusURL(token)
         const source = new EventSource(url);
     
         source.addEventListener('open', () => {
@@ -32,7 +33,7 @@ function DashboardLayout(props) {
         return () => {
           source.close();
         };
-      }, []);
+      }, [token]);
 
     function getLayout() {
         const userStatus = userInfo.status
@@ -73,6 +74,15 @@ function DashboardLayout(props) {
             })
             return (
                 <FinishLayout userInfo={userInfo} eventsParsed={eventsParsed} />
+            )
+        }
+
+        if (userStatus === 'RESULTS_RANKED') {
+            const {likedItems, discardedItems} = userInfo.eventsSelection
+            console.log(likedItems)
+            console.log(discardedItems)
+            return (
+                <EventsSelectionLayout userInfo={userInfo} likedItems={likedItems}  discardedItems={discardedItems} />
             )
         }
     }

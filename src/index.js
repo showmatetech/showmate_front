@@ -8,6 +8,7 @@ import './static/fonts/blinker/Blinker-Bold.ttf';
 import './static/fonts/blinker/Blinker-SemiLight.ttf';
 import './static/fonts/blinker/Blinker-Light.ttf';
 import './static/fonts/blinker/Blinker-Thin.ttf';
+import './static/fonts/HelveticaNeue/HelveticaNeueCyr-Bold.ttf';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

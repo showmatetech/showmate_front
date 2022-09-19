@@ -12,7 +12,7 @@ const CardComponent = styled.div`
     height: ${props => (props.width ? props.height : `60vh`)};
 
     background: ${props => (props.withBackground ? `rgba(255, 255, 255, 0.25);` : ``)}; 
-    border-radius: ${props => (props.withBackground ? `30px;` : ``)};
+    border-radius: ${props => (props.withBackground ? `20px;` : ``)};
     box-shadow: ${props => (props.withBackground ? `0 4px 18px rgba(0, 0, 0, 0.4);` : ``)};
     backdrop-filter: ${props => (props.withBackground ? `blur(20px);` : ``)};
     -webkit-backdrop-filter: ${props => (props.withBackground ? `blur(20px);` : ``)};

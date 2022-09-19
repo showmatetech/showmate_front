@@ -12,50 +12,10 @@ const CenterContainer = styled.div`
     position: absolute;
     top: 46%;
     bottom: 54%;
-    right: 5%;
-    left: 5%;
+    right: 0%;
+    left: 0%;
 `
 
-const ImageContainer = styled.div`
-    display: flex;
-    flex: 1;
-    justify-content: center;
-    margin-left: 20px;
-    margin-right: 5px;
-`
-
-const Image = styled.img`
-    border-radius: 10%;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-    width: 80%;
-    src: ${props => (props.src ? props.src : '')};
-`
-
-const InfoContainer = styled.div`
-    display: flex;
-    flex: 1;
-    justify-content: center;
-    flex-direction: column;
-    margin-left: 5px;
-    margin-right: 20px;
-`
-const InfoTitle = styled.h1`
-    width: 90%;
-    margin-bottom: 10px;
-    margin-top: 0px;
-    font-size: 35px;
-    color: rgba(56, 56, 56, 1);
-    font-family: "BlinkerBold";
-`;
-
-const InfoSubTitle = styled.h1`
-    width: 90%;
-    margin-bottom: 2px;
-    margin-top: 2px;
-    font-size: 20px;
-    color: rgba(56, 56, 56, 1);
-    font-family: "BlinkerLight";
-`;
 
 const ButtonContainer = styled.div`
     display: flex;

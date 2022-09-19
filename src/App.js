@@ -15,7 +15,10 @@ function App() {
   const [token, setToken] = useState(null);
 
   useEffect(() => {
-    setToken(accessToken)
+    if (accessToken){
+      setToken(accessToken)
+    }
+    
   }, []);
 
   return (
@@ -31,7 +34,7 @@ function App() {
       ) : (
         <Router>
           <Routes>
-            <Route path="*" element={<Dashboard />}></Route>
+            <Route path="*" element={<Dashboard token={token}/>}></Route>
           </Routes>
         </Router>
       )}

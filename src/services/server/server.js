@@ -122,6 +122,11 @@ export const restart = async () => {
     }
 }
 
-export const getEventsStatusURL = () => {
-    return `${EVENTS_URL}/status?access_token=${LOCALSTORAGE_VALUES.accessToken}`
+export const getEventsStatusURL = (token) => {
+    if (token){
+        return `${EVENTS_URL}/status?access_token=${token}`
+    }
+    else{
+        return `${EVENTS_URL}/status?access_token=${LOCALSTORAGE_VALUES.accessToken}`
+    }
 }

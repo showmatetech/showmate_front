@@ -71,7 +71,7 @@ const LOCALSTORAGE_VALUES = {
     window.localStorage.removeItem(LOCALSTORAGE_KEYS[property]);
   }
   // Navigate to homepage
-  window.location = window.location.origin;
+  window.location = window.location.pathname = '/login'
 };
 
 /**
@@ -114,9 +114,12 @@ const getAccessToken = () => {
     window.history.pushState({}, null, "/");
 
     // Return access token from query params
+    console.log('LLEGA4.2')
+    console.log(queryParams[LOCALSTORAGE_KEYS.accessToken])
+    window.location.reload(true);
     return queryParams[LOCALSTORAGE_KEYS.accessToken];
   }
-
+  console.log('LLEGA4.1')
   console.log(queryParams)
   // We should never get here!
   return false;

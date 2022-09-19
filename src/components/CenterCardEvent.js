@@ -13,8 +13,8 @@ const CenterContainer = styled.div`
     position: absolute;
     top: 46%;
     bottom: 54%;
-    right: 5%;
-    left: 5%;
+    right: 0%;
+    left: 0%;
 
     -webkit-transition: all  0.9s 0.4s ease;
     -moz-transition: all  0.9s 0.4s ease; 
@@ -32,7 +32,7 @@ const Card = styled.div`
     height: 475px;
 
     background: ${props => (props.withBackground ? `rgba(255, 255, 255, 0.25);` : ``)}; 
-    border-radius: ${props => (props.withBackground ? `30px;` : ``)};
+    border-radius: ${props => (props.withBackground ? `20px;` : ``)};
     box-shadow: ${props => (props.withBackground ? `0 4px 18px rgba(0, 0, 0, 0.4);` : ``)};
     backdrop-filter: ${props => (props.withBackground ? `blur(20px);` : ``)};
     -webkit-backdrop-filter: ${props => (props.withBackground ? `blur(20px);` : ``)};

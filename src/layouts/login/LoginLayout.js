@@ -22,10 +22,10 @@ const CenterContainer = styled.div`
 `
 
 const LoginTitleContainer = styled.div`
-    max-width: 500px;
+    max-width: 580px;
     min-width: 250px;
-    margin-top: 10px;
-    margin-bottom: 40px;
+    margin-top: 0px;
+    margin-bottom: 20px;
     margin-left: 20px;
     margin-right: 20px;
 `
@@ -33,7 +33,7 @@ const LoginTitleContainer = styled.div`
 const LoginTitle = styled.h1`
   font-size: 55px;
   color: rgba(56, 56, 56, 1);
-  font-family: "BlinkerBold";
+  font-family: "HelveticaNeueBold";
 `
 
 const LoginButtonContainer = styled.div`
@@ -56,7 +56,7 @@ const LoginButton = styled.button`
 const LoginButtonText = styled.h1`
     font-size: 18px;
     color: rgba(56, 56, 56, 1);
-    font-family: "BlinkerBold";
+    font-family: "HelveticaNeueBold";
 `
 
 
@@ -67,14 +67,14 @@ function LoginLayout(props) {
       <Card withBackground={true} width='700px' height='60vh'>
         <LoginTitleContainer>
           <LoginTitle>
-            Sign in with your Spotify account and our AI will do the magic
+            ¡Conecta con tu cuenta de Spotify y déjanos ser tu acompañante perfecto!
           </LoginTitle>
         </LoginTitleContainer>
         <LoginButtonContainer>
           <a href={`${EVENTS_URL}/login`}>
             <LoginButton>
               <LoginButtonText>
-                Sign in with Spotify
+                Conecta con Spotify
               </LoginButtonText>
             </LoginButton>
           </a>
